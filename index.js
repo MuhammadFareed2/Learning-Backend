@@ -1,40 +1,24 @@
-const Tasks = [
-    {
-        id: 1,
-        tasks: "Sona Nahi Hai"
-    },
-    {
-        id: 2,
-        tasks: "Jagna Hai"
-    },
-    {
-        id: 3,
-        tasks: "Concept Samjna hai"
-    },
-]
+import express from "express"
 
-import express from "express";
-const app = express();
-const PORT = 4000
+const app = express()
+app.use(express.json())
 
-app.get('/', (req, res) => {
-    console.log(req)
-    res.status(200).send(Tasks)
+
+app.get("/news/:id", (req, res) => {
+    let currentId = req.params.id;
+    res.send("News api Called" + currentId)
 })
 
-app.post('/', (req, res) => {
-    console.log(req)
-    res.send('post request is executed')
+
+app.post("/login", (req, res) => {
+    console.log(req.query);
+    res.send({
+        message: "Login Successful",
+        // bodyData: req.body,
+        queryData: req.query,
+    })
 })
 
-app.put('/', (req, res) => {
-    console.log(req)
-    res.send('put request is executed')
-})
-
-app.delete('/', (req, res) => {
-    console.log(req)
-    res.send('delete request is executed')
-})
-
-app.listen(PORT, () => console.log(`Server ${PORT}`))
+app.listen(3000, () => {
+    console.log("Server is running on port 3000");
+}); 
